@@ -83,7 +83,7 @@ if __name__ == "__main__":  # noqa: C901
     parser.add_argument(
         "--hyperparam-title",
         type=str,
-        defaut="",
+        default="",
         help="Use the hyperparams under this name in the hyperparameter file instead of whatever the default is (most likely the env_id)"
     )
     parser.add_argument(
