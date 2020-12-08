@@ -81,6 +81,12 @@ if __name__ == "__main__":  # noqa: C901
         "--env-kwargs", type=str, nargs="+", action=StoreDict, help="Optional keyword argument to pass to the env constructor"
     )
     parser.add_argument(
+        "--hyperparam-title",
+        type=str,
+        defaut="",
+        help="Use the hyperparams under this name in the hyperparameter file instead of whatever the default is (most likely the env_id)"
+    )
+    parser.add_argument(
         "-params",
         "--hyperparams",
         type=str,
@@ -139,6 +145,7 @@ if __name__ == "__main__":  # noqa: C901
         args.eval_episodes,
         args.save_freq,
         args.hyperparams,
+        args.hyperparam_title,
         args.env_kwargs,
         args.trained_agent,
         args.optimize_hyperparameters,

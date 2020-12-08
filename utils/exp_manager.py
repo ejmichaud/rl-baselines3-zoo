@@ -56,6 +56,7 @@ class ExperimentManager(object):
         n_eval_episodes: int = 5,
         save_freq: int = -1,
         hyperparams: Optional[Dict[str, Any]] = None,
+        hyperparam_title: str = "",
         env_kwargs: Optional[Dict[str, Any]] = None,
         trained_agent: str = "",
         optimize_hyperparameters: bool = False,
@@ -80,6 +81,7 @@ class ExperimentManager(object):
         self.env_id = env_id
         # Custom params
         self.custom_hyperparams = hyperparams
+        self.hyperparam_title = hyperparam_title
         self.env_kwargs = {} if env_kwargs is None else env_kwargs
         self.n_timesteps = n_timesteps
         self.normalize = False
@@ -234,7 +236,9 @@ class ExperimentManager(object):
         # Load hyperparameters from yaml file
         with open(f"hyperparams/{self.algo}.yml", "r") as f:
             hyperparams_dict = yaml.safe_load(f)
-            if self.env_id in list(hyperparams_dict.keys()):
+            if self.hyperparam_title and self.hyperparam_title in list(hyperparams_dict.keys()):
+                hyperparams = hyperparams_dict[self.hyperparam_title]
+            elif self.env_id in list(hyperparams_dict.keys()):
                 hyperparams = hyperparams_dict[self.env_id]
             elif self._is_atari:
                 hyperparams = hyperparams_dict["atari"]
